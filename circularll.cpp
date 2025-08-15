@@ -1,64 +1,33 @@
-#include<bits/stdc++.h>
+#include <vector>
+#include <algorithm>
+#include <climits>
+
 using namespace std;
-class Node{
-public:
-int data;
-Node* next;
-//constractor
-Node(int d){
-    this->data=d;
-    this->next=NULL;
-}
-//Distructor
-~Node(){
-    int value=this->data;
-    //memory free
-    if(this->next!=NULL){
-        delete next;
-        this->next=NULL;
-    }cout<<"memory is free ="<<value<<endl;
-}
-};
 
-//insert at head;
-void InsertAtnode(Node* &tail,int element,int d){
-//create new node
-if(tail==NULL){
-    Node* newNode=new Node(d);
-    tail=newNode;
-    newNode->next=newNode;
-}
-else{
-Node* curr =tail;
-
-while(curr->data!=element){
-   curr=curr->next; 
-}
-Node* temp=new Node(d);
-temp->next=curr->next;
-curr->next=temp;
-}
-}
-void print(Node* tail){
-    Node* temp=tail;
-    do{
-    cout<<tail->data<<" ";
-    tail=tail->next;
+int minEnergy(int A) {
+    if (A == 1) {
+        return 0;
     }
-    while(tail!=temp);
-    cout<<endl;
-}
-int main(){
-Node* tail=NULL;
-InsertAtnode(tail,5,3);
- print(tail);
- InsertAtnode(tail,3,5);
- print(tail);
- InsertAtnode(tail,7,9);
- print(tail);
-InsertAtnode(tail,9,10);
-print(tail);
-InsertAtnode(tail,3,4);
-print(tail);
-return 0;
+    vector<int> dp(A + 1, INT_MAX);
+    dp[1] = 0; // Base case: 1 line requires 0 energy
+
+    for (int i = 2; i <= A; ++i) {
+        // Option 1: Build up line by line (costly)
+        dp[i] = dp[i-1] + 1;
+
+        // Option 2: Check all possible divisors
+        for (int d = 1; d * d <= i; ++d) {
+            if (i % d == 0) {
+                // Divisor d
+                if (d < i) {
+                    dp[i] = min(dp[i], dp[d] + i / d);
+                }
+                // Corresponding divisor i/d
+                if (i / d < i && i / d != d) {
+                    dp[i] = min(dp[i], dp[i / d] + d);
+                }
+            }
+        }
+    }
+    return dp[A];
 }
