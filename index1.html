@@ -1,0 +1,543 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>EcoSecure — Green Cyber Security Solutions</title>
+  <style>
+    /* ---------- START: Base Styles ---------- */
+    *, :after, :before {
+      box-sizing: border-box;
+      border: 0 solid #e5e7eb;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: linear-gradient(135deg, #000000 0%, #0a200a 25%, #132813 50%, #0a200a 75%, #000000 100%);
+      color: #e4e7eb;
+      overflow-x: hidden;
+      cursor: none;
+    }
+
+    /* Enhanced green cyber background */
+    .cyber-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        radial-gradient(circle at 15% 50%, rgba(34, 197, 94, 0.1) 0%, transparent 25%),
+        radial-gradient(circle at 85% 30%, rgba(16, 185, 129, 0.1) 0%, transparent 25%),
+        radial-gradient(circle at 50% 80%, rgba(5, 150, 105, 0.1) 0%, transparent 25%);
+      z-index: -2;
+    }
+
+    /* Data flow animation container */
+    .data-flow-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .data-stream {
+      position: absolute;
+      width: 2px;
+      height: 100px;
+      background: linear-gradient(to bottom, transparent, #10b981, transparent);
+      opacity: 0.7;
+      animation: dataFlow 8s linear infinite;
+      box-shadow: 0 0 10px #10b981, 0 0 20px #10b981;
+    }
+
+    @keyframes dataFlow {
+      0% {
+        transform: translateY(-100px) rotate(0deg);
+        opacity: 0;
+      }
+      5% {
+        opacity: 0.7;
+      }
+      95% {
+        opacity: 0.7;
+      }
+      100% {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    /* Custom cursor styles */
+    .cursor-dot {
+      width: 8px;
+      height: 8px;
+      background-color: #10b981;
+      border-radius: 50%;
+      position: fixed;
+      pointer-events: none;
+      z-index: 9999;
+      transition: opacity 0.3s ease;
+      box-shadow: 0 0 10px #10b981;
+    }
+
+    .cursor-outline {
+      width: 40px;
+      height: 40px;
+      border: 2px solid rgba(16, 185, 129, 0.5);
+      border-radius: 50%;
+      position: fixed;
+      pointer-events: none;
+      z-index: 9998;
+      transition: all 0.2s ease-out;
+      box-shadow: 0 0 15px rgba(16, 185, 129, 0.3);
+    }
+
+    .cursor-dot.hidden, .cursor-outline.hidden {
+      opacity: 0;
+    }
+
+    .cursor-click {
+      width: 50px;
+      height: 50px;
+      border: 2px solid #10b981;
+      border-radius: 50%;
+      position: fixed;
+      pointer-events: none;
+      z-index: 9997;
+      opacity: 0;
+      transition: all 0.3s ease;
+    }
+
+    .cursor-click.animate {
+      animation: clickEffect 0.5s forwards;
+    }
+
+    @keyframes clickEffect {
+      0% {
+        opacity: 1;
+        transform: scale(0.8);
+      }
+      100% {
+        opacity: 0;
+        transform: scale(1.5);
+      }
+    }
+
+    /* Green cyber security theme colors */
+    .cyber-gradient {
+      background: linear-gradient(90deg, #059669, #10b981, #34d399);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .cyber-glow {
+      text-shadow: 0 0 10px rgba(16, 185, 129, 0.5),
+                   0 0 20px rgba(16, 185, 129, 0.3),
+                   0 0 30px rgba(16, 185, 129, 0.2);
+    }
+
+    /* Layout utilities */
+    .relative { position: relative; }
+    .fixed { position: fixed; }
+    .absolute { position: absolute; }
+    .inset-0 { top: 0; right: 0; bottom: 0; left: 0; }
+    .z-40 { z-index: 40; }
+    .z-50 { z-index: 50; }
+    .w-full { width: 100%; }
+    .w-screen { width: 100vw; }
+    .h-full { height: 100%; }
+    .h-screen { height: 100vh; }
+    .min-h-screen { min-height: 100vh; }
+    .flex { display: flex; }
+    .flex-col { flex-direction: column; }
+    .items-center { align-items: center; }
+    .justify-center { justify-content: center; }
+    .justify-between { justify-content: space-between; }
+    .container { width: 100%; max-width: 1280px; margin-left: auto; margin-right: auto; padding-left: 1rem; padding-right: 1rem; }
+    .mx-auto { margin-left: auto; margin-right: auto; }
+    .px-6 { padding-left: 1.5rem; padding-right: 1.5rem; }
+    .py-6 { padding-top: 1.5rem; padding-bottom: 1.5rem; }
+    .py-16 { padding-top: 4rem; padding-bottom: 4rem; }
+    .p-4 { padding: 1rem; }
+    .rounded-xl { border-radius: 0.75rem; }
+    .rounded-full { border-radius: 9999px; }
+    .overflow-hidden { overflow: hidden; }
+    .shadow-2xl { box-shadow: 0 25px 50px rgba(0,0,0,.25); }
+    .shadow-lg { box-shadow: 0 10px 25px rgba(0,0,0,.2); }
+    .text-center { text-align: center; }
+    .text-white { color: #fff; }
+    .text-gray-300 { color: #d1d5db; }
+    .font-extrabold { font-weight: 800; }
+    .font-semibold { font-weight: 600; }
+    .leading-tight { line-height: 1.05; }
+    .tracking-widest { letter-spacing: .1em; }
+
+    /* Background & color utilities */
+    .bg-neutral-900 { background-color: rgb(23 23 23); }
+    .bg-black { background-color: #000; }
+    .bg-black\/50 { background-color: rgba(0,0,0,0.5); }
+
+    /* Responsive helpers */
+    @media (min-width: 768px) {
+      .md\:w-1\/2 { width: 50%; }
+      .md\:py-28 { padding-top: 7rem; padding-bottom: 7rem; }
+      .md\:flex-row { flex-direction: row; }
+    }
+
+    /* Cyber grid background */
+    .cyber-grid {
+      background-image: 
+        linear-gradient(rgba(16, 185, 129, 0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(16, 185, 129, 0.1) 1px, transparent 1px);
+      background-size: 50px 50px;
+      mask-image: radial-gradient(ellipse at center, black 40%, transparent 70%);
+    }
+
+    /* Neon effects */
+    .neon-title {
+      font-weight: 900;
+      color: #ecfdf5;
+      text-shadow:
+        0 0 6px rgba(16, 185, 129, 0.25),
+        0 0 20px rgba(16, 185, 129, 0.15),
+        0 0 40px rgba(16, 185, 129, 0.08);
+      letter-spacing: 0.6px;
+    }
+
+    .neon-stroke {
+      display: block;
+      font-size: 1.05rem;
+      color: transparent;
+      background-clip: text;
+      -webkit-background-clip: text;
+      background-image: linear-gradient(90deg, #059669, #10b981);
+      text-shadow: 0 0 18px rgba(16, 185, 129, 0.18);
+    }
+
+    .neon-sub { 
+      color: #d1fae5; 
+      text-shadow: 0 0 10px rgba(255,255,255,0.08); 
+    }
+
+    /* Button styles */
+    .cyber-button {
+      background: linear-gradient(90deg, #059669, #10b981, #34d399);
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border-radius: 9999px;
+      font-weight: 600;
+      box-shadow: 0 0 15px rgba(16, 185, 129, 0.4);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cyber-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 25px rgba(16, 185, 129, 0.6);
+    }
+
+    .cyber-button:before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(
+        to bottom right,
+        rgba(255, 255, 255, 0.2),
+        rgba(255, 255, 255, 0)
+      );
+      transform: rotate(45deg);
+      transition: all 0.5s ease;
+    }
+
+    .cyber-button:hover:before {
+      transform: rotate(45deg) translate(50%, 50%);
+    }
+
+    /* Outline button */
+    .outline-button {
+      background: transparent;
+      border: 2px solid #10b981;
+      color: #10b981;
+      padding: 0.75rem 1.5rem;
+      border-radius: 9999px;
+      font-weight: 600;
+      box-shadow: 0 0 15px rgba(16, 185, 129, 0.2);
+      transition: all 0.3s ease;
+    }
+
+    .outline-button:hover {
+      background: rgba(16, 185, 129, 0.1);
+      transform: translateY(-2px);
+      box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
+    }
+
+    /* Blob animation */
+    @keyframes blob {
+      0% { transform: translate(0px, 0px) scale(1); }
+      33% { transform: translate(30px, -50px) scale(1.05); }
+      66% { transform: translate(-20px, 20px) scale(0.95); }
+      100% { transform: translate(0px, 0px) scale(1); }
+    }
+
+    .animate-blob { 
+      animation: blob 10s infinite; 
+    }
+
+    .opacity-20 { 
+      opacity: 0.20; 
+    }
+
+    /* Hover effects for interactive elements */
+    .hover-lift {
+      transition: transform 0.3s ease;
+    }
+
+    .hover-lift:hover {
+      transform: translateY(-5px);
+    }
+
+    /* Hexagon grid background */
+    .hexagon-grid {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -3;
+      opacity: 0.1;
+      background-image: 
+        radial-gradient(circle at 50% 50%, rgba(16, 185, 129, 0.1) 0%, transparent 20%),
+        repeating-linear-gradient(0deg, transparent, transparent 19px, rgba(16, 185, 129, 0.1) 19px, rgba(16, 185, 129, 0.1) 20px),
+        repeating-linear-gradient(60deg, transparent, transparent 19px, rgba(5, 150, 105, 0.1) 19px, rgba(5, 150, 105, 0.1) 20px),
+        repeating-linear-gradient(120deg, transparent, transparent 19px, rgba(4, 120, 87, 0.1) 19px, rgba(4, 120, 87, 0.1) 20px);
+    }
+
+    /* Feature cards */
+    .feature-card {
+      background: rgba(6, 78, 59, 0.3);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(16, 185, 129, 0.2);
+      border-radius: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(16, 185, 129, 0.2);
+      border-color: rgba(16, 185, 129, 0.4);
+    }
+  </style>
+</head>
+<body>
+  <!-- Background elements -->
+  <div class="hexagon-grid"></div>
+  <div class="cyber-bg"></div>
+  <div class="data-flow-container" id="dataFlowContainer"></div>
+
+  <!-- Custom cursor elements -->
+  <div class="cursor-dot hidden"></div>
+  <div class="cursor-outline hidden"></div>
+  <div class="cursor-click"></div>
+
+  <div class="relative min-h-screen w-full">
+    <!-- Fixed top area (brand and skip) -->
+    <div class="fixed top-0 left-0 right-0 z-50 flex justify-between items-center py-4 px-6">
+      <div class="font-semibold text-white cyber-glow">EcoSecure</div>
+      <div>
+        <button id="skipBtn" class="cyber-button">Explore Now</button>
+      </div>
+    </div>
+
+    <!-- Main content -->
+    <section class="relative z-30 flex flex-col md:flex-row items-center gap-10 px-6 py-16 md:py-28 container mx-auto min-h-screen">
+      <!-- Left Column -->
+      <div class="md:w-1/2 space-y-6">
+        <h2 class="text-4xl md:text-5xl font-extrabold leading-tight">
+          Sustainable <span class="cyber-gradient cyber-glow">Cyber Security</span> <br class="hidden md:block" />
+          For A Greener Future
+        </h2>
+
+        <p class="text-lg text-gray-300 font-medium leading-relaxed">
+          Protecting your digital ecosystem with environmentally-conscious security solutions, 
+          sustainable threat intelligence, and energy-efficient monitoring systems.
+        </p>
+
+        <div class="flex flex-wrap gap-4 mt-6">
+          <button onclick="location.href='/services'" class="cyber-button hover-lift">Our Services</button>
+          <button onclick="location.href='/contact'" class="outline-button hover-lift">Contact Us</button>
+        </div>
+      </div>
+
+      <!-- Right Column: Cyber security visualization -->
+      <div class="md:w-1/2 w-full max-w-xl mx-auto relative">
+        <div class="relative rounded-xl overflow-hidden shadow-2xl border border-emerald-500/20 hover-lift">
+          <div class="cyber-grid absolute inset-0 z-0"></div>
+          <div class="relative z-10 p-8">
+            <div class="text-center mb-6">
+              <div class="text-emerald-400 text-5xl mb-4">🌿</div>
+              <h3 class="text-xl font-bold text-white">Eco-Friendly Security</h3>
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+              <div class="feature-card p-4 text-center">
+                <div class="text-emerald-400 text-2xl mb-2">🔒</div>
+                <p class="text-sm text-white">Green Encryption</p>
+              </div>
+              <div class="feature-card p-4 text-center">
+                <div class="text-emerald-400 text-2xl mb-2">📊</div>
+                <p class="text-sm text-white">Eco Analytics</p>
+              </div>
+              <div class="feature-card p-4 text-center">
+                <div class="text-emerald-400 text-2xl mb-2">🌐</div>
+                <p class="text-sm text-white">Sustainable Networks</p>
+              </div>
+              <div class="feature-card p-4 text-center">
+                <div class="text-emerald-400 text-2xl mb-2">⚠️</div>
+                <p class="text-sm text-white">Green Response</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- decorative floating elements (green theme) -->
+    <div class="fixed inset-0 pointer-events-none z-0">
+      <div class="absolute top-5% left-5% w-64 h-64 bg-emerald-500/10 rounded-full mix-blend-screen filter blur-3xl opacity-20 animate-blob"></div>
+      <div class="absolute top-15% right-10% w-72 h-72 bg-green-500/10 rounded-full mix-blend-screen filter blur-3xl opacity-15 animate-blob" style="animation-delay: 2s;"></div>
+      <div class="absolute bottom-10% left-15% w-60 h-60 bg-emerald-500/10 rounded-full mix-blend-screen filter blur-3xl opacity-10 animate-blob" style="animation-delay: 4s;"></div>
+    </div>
+  </div>
+
+  <script>
+    // Create data flow animation
+    function createDataFlow() {
+      const container = document.getElementById('dataFlowContainer');
+      const streamCount = 30;
+      
+      for (let i = 0; i < streamCount; i++) {
+        const stream = document.createElement('div');
+        stream.className = 'data-stream';
+        
+        // Random position
+        const left = Math.random() * 100;
+        stream.style.left = `${left}%`;
+        
+        // Random delay
+        const delay = Math.random() * 8;
+        stream.style.animationDelay = `${delay}s`;
+        
+        // Random height and width
+        const height = 50 + Math.random() * 100;
+        stream.style.height = `${height}px`;
+        
+        const width = 1 + Math.random() * 3;
+        stream.style.width = `${width}px`;
+        
+        // Green color variation
+        const hue = 140 + Math.random() * 20 - 10; // Green range
+        stream.style.background = `linear-gradient(to bottom, transparent, hsl(${hue}, 80%, 45%), transparent)`;
+        stream.style.boxShadow = `0 0 10px hsl(${hue}, 80%, 45%), 0 0 20px hsl(${hue}, 80%, 45%)`;
+        
+        container.appendChild(stream);
+      }
+    }
+
+    // Custom cursor implementation
+    document.addEventListener('DOMContentLoaded', function() {
+      // Create data flow animation
+      createDataFlow();
+      
+      const cursorDot = document.querySelector('.cursor-dot');
+      const cursorOutline = document.querySelector('.cursor-outline');
+      const cursorClick = document.querySelector('.cursor-click');
+      
+      // Show custom cursor
+      cursorDot.classList.remove('hidden');
+      cursorOutline.classList.remove('hidden');
+      
+      let mouseX = 0;
+      let mouseY = 0;
+      let outlineX = 0;
+      let outlineY = 0;
+      let scale = 1;
+      let opacity = 0.5;
+      
+      // Track mouse position
+      document.addEventListener('mousemove', function(e) {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+      });
+      
+      // Handle click animation
+      document.addEventListener('mousedown', function() {
+        scale = 0.8;
+        opacity = 0.8;
+        cursorClick.classList.add('animate');
+        setTimeout(() => {
+          cursorClick.classList.remove('animate');
+        }, 500);
+      });
+      
+      document.addEventListener('mouseup', function() {
+        scale = 1;
+        opacity = 0.5;
+      });
+      
+      // Handle hover states
+      const interactiveElements = document.querySelectorAll('button, a, [onclick]');
+      
+      interactiveElements.forEach(element => {
+        element.addEventListener('mouseenter', function() {
+          scale = 1.5;
+          opacity = 0.8;
+          cursorOutline.style.border = '2px solid #10b981';
+          cursorOutline.style.background = 'rgba(16, 185, 129, 0.1)';
+        });
+        
+        element.addEventListener('mouseleave', function() {
+          scale = 1;
+          opacity = 0.5;
+          cursorOutline.style.border = '2px solid rgba(16, 185, 129, 0.5)';
+          cursorOutline.style.background = 'transparent';
+        });
+      });
+      
+      // Animation loop for smooth cursor movement
+      function animateCursor() {
+        // Move dot to mouse position
+        cursorDot.style.left = `${mouseX - 4}px`;
+        cursorDot.style.top = `${mouseY - 4}px`;
+        
+        // Smooth movement for outline
+        outlineX += (mouseX - outlineX - 20) * 0.1;
+        outlineY += (mouseY - outlineY - 20) * 0.1;
+        
+        cursorOutline.style.left = `${outlineX}px`;
+        cursorOutline.style.top = `${outlineY}px`;
+        cursorOutline.style.transform = `scale(${scale})`;
+        cursorOutline.style.opacity = opacity;
+        
+        // Position click effect at mouse
+        cursorClick.style.left = `${mouseX - 25}px`;
+        cursorClick.style.top = `${mouseY - 25}px`;
+        
+        requestAnimationFrame(animateCursor);
+      }
+      
+      animateCursor();
+    });
+  </script>
+</body>
+</html>
